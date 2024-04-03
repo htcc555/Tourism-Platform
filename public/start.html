@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="./js/vue.js"></script>
+  <link rel="stylesheet" href="./css/eui.css" />
+  <script src="./js/eui.js"></script>
+  <script src="./js/axios.min.js"></script>
+  <style>
+    #total {
+      margin: auto;
+      width: 1120px;
+      height: auto;
+      overflow-x: hidden;
+      font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    }
+
+    .el-row {
+      height: 68px;
+      border-bottom: 2px solid rgb(245, 246, 247);
+
+    }
+
+    .head-ul {
+      list-style-type: none;
+    }
+
+    .head-li {
+      display: inline;
+      margin-left: 29px;
+    }
+
+    .head-li:hover {
+      border-bottom: 3px solid #f18541;
+    }
+
+    .el1 {
+      overflow-y: hidden;
+    }
+
+    .el2 {
+      font-size: 18px;
+    }
+
+    .el3 {
+      width: auto;
+      float: left;
+      font-size: 14px;
+      margin: auto;
+      padding-top: 15px;
+      padding-left: 32px;
+    }
+
+    .search {
+      width: 420px;
+      height: 50px;
+      margin: auto;
+
+      float: left;
+    }
+
+    .btn1 {
+      width: 40px;
+      height: 44px;
+      border: none;
+      background-color: #f18541;
+      color: white;
+      font-size: 10px;
+      border-radius: 0 10px 10px 0;
+      margin-left: -2px;
+    }
+
+    .input1 {
+      height: 39px;
+      width: 320px;
+      border: 2px solid #c4c7ce;
+      /* 取消点击后的边框 */
+      outline: none;
+      border-radius: 10px 0 0 10px;
+      float: left;
+
+    }
+
+    .input1:hover {
+      border-color: #a7aab5;
+    }
+
+    .input1:focus {
+      /*针对input点击*/
+      border-color:#f18541;
+    } 
+
+
+
+    .btn1:hover {
+      background-color:#ce570d;
+    }
+
+
+    .search_entrys_item {
+      width: 157px;
+      height: 50px;
+      border: 1px solid #e5e5e5;
+      background-image: url(./img/entry_item.png);
+      background-repeat: no-repeat;
+      background-size: 104px auto;
+      display: inline-block;
+      margin-left: 13px;
+      border-radius: 7px;
+    }
+
+    .search_entrys_item:hover {
+      box-shadow: 8px 8px 8px #dedede;
+    }
+
+    .search_entrys_title {
+      height: 22px;
+      width: 68px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: PingFangSC-Semibold;
+      color: #333;
+    }
+
+    .search-entrys-subtitle {
+      height: 16px;
+      padding-top: 1px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16px;
+      font-family: PingFangSC-Regular;
+      color: #9d9d9d;
+    }
+
+    .title {
+      position: relative;
+      height: 64px;
+      color: #636363;
+      text-align: center;
+      font: 36px / 74px Hiragino Sans GB, Microsoft YaHei, SimHei, SimSun, sans-serif;
+    }
+  </style>
+</head>
+
+<body style="margin: 0">
+  <div id="total">
+    <div id="app" style="width: 1120px; height: auto; margin: auto；">
+      <el-container>
+        <el-header style="height: 60px;">
+          <el-row style="height: 58px;">
+            <el-col :span="4" style="height: 58px;">
+              <div class="el1"><img src="./img/logo.png" alt="" /></div>
+            </el-col>
+            <el-col :span="16" style="height: 58px;">
+              <div class="el2">
+                <ul class="head-ul">
+                  <li class="head-li" style="background-color:#f18541">首页</li>
+                  <li class="head-li">旅游攻略</li>
+                  <li class="head-li">景点详情</li>
+                  <li class="head-li">个人中心</li>
+                  <li class="head-li">社区</li>
+                  <li class="head-li">AI咨询</li>
+                </ul>
+              </div>
+            </el-col>
+            <el-col :span="4" style="height: 58px;">
+              <div class="el3">
+                <a href="" style="margin: auto; border-right: 2px solid black">登录</a>
+                <a href="" style="margin: auto; border-left: 2px solid black">注册</a>
+              </div>
+            </el-col>
+          </el-row>
+        </el-header>
+
+        <el-main>
+          <!-- 走马灯 -->
+          <template>
+            <el-carousel :interval="5000" arrow="always" height="400px" style="padding-bottom: 15px;">
+              <el-carousel-item v-for="item in hpicture" :key="item">
+                <img :src="item" alt="" style="height: 100%; width: 100%" />
+              </el-carousel-item>
+            </el-carousel>
+          </template>
+          <!-- 搜索栏 -->
+          <el-row>
+            <el-col :span="8">
+              <div class="search_entrys_item" style="background-position: 78px -30px;">
+                <div class="search_entrys_title"> &nbsp&nbsp&nbsp跟团游</div>
+                <div class="search-entrys-subtitle">&nbsp&nbsp&nbsp行程透明省心游</div>
+              </div>
+              <div class="search_entrys_item" style="background-position: 78px -134px;">
+                <div class="search_entrys_title"> &nbsp&nbsp&nbsp自由行</div>
+                <div class="search-entrys-subtitle">&nbsp&nbsp&nbsp旅行就要更自在</div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="search">
+                <input type="text" class="input1" placeholder="搜索目的地/攻略/酒店" />
+                <button class="btn1">搜索</button>
+                <img src="../img/7.png" alt="" />
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="search_entrys_item" style="background-position: 78px -239px;">
+                <div class="search_entrys_title"> &nbsp&nbsp&nbsp当地游</div>
+                <div class="search-entrys-subtitle">&nbsp&nbsp&nbsp最地道的玩法体验</div>
+              </div>
+              <div class="search_entrys_item" style="background-position: 78px -341px;">
+                <div class="search_entrys_title"> &nbsp&nbsp&nbsp订酒店</div>
+                <div class="search-entrys-subtitle">&nbsp&nbsp&nbsp全网一键比价</div>
+              </div>
+            </el-col>
+          </el-row>
+
+
+          <!-- 热门攻略 -->
+          <div class="title">
+            <h3 style="text-decoration: none;">热门攻略与话题</h3>
+          </div>
+          <el-row>
+            <el-col :span="6" v-for="item in cards" :key="item">
+              <div class="cards_s" style="padding: 10px;">
+                <el-card :style="{ padding: '0px' }" shadow="hover">
+                  <img :src='item.url' style="width: 100%;height:250px;">
+                  <div style="padding: 10px;">
+                    <span>好吃的汉堡</span>
+                    <div>
+
+                    </div>
+                  </div>
+                </el-card>
+              </div>
+    </div>
+    </el-col>
+    </el-row>
+
+    <div style="margin: auto; width: 1070px; height: 652px;background: linear-gradient(180deg, #6dd27c, #1bcdae);
+          background-image: linear-gradient(rgb(109, 210, 124), rgb(27, 205, 174));
+          background-position-x: initial;
+          background-position-y: initial;
+          background-size: initial;
+          background-repeat: initial;
+          background-attachment: initial;
+          background-origin: initial;
+          background-clip: initial;
+          background-color: initial;"></div>
+
+    <div style="margin: auto; width: 1070px; height: 652px;
+          background-color: rgb(245,245,245);">
+          </div>
+    </el-main>
+
+    <el-footer>
+      <div style="width: 1070px; background-color: #3f3f3f; height: 100px;margin: auto;">
+        <div>
+          <img src="./img/logo foot.png" style="float: left" alt="" />
+        </div>
+        <div style="
+                float: left;
+                font-size: 16px;
+                color: white;
+                margin-top: 20px;
+                margin-left: 148px;
+              ">
+          代码都对队有限公司所有
+          <br />
+          <p>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp制作人:一位不愿透露姓名的ikun
+          </p>
+        </div>
+      </div>
+    </el-footer>
+    </el-container>
+  </div>
+  </div>
+
+  <script>
+    let v = new Vue({
+      el: "#app",
+      data: {
+        hpicture: [
+          "./img/carousel/7(JJV8}6DEY~C4L9RK9WF$1.jpg",
+          "./img/carousel/8)FD0`B3%DT5RB)))2I$D0U.jpg",
+          "./img/carousel/TO%WLW${2MGCA{CZ8[2Q3@4.jpg",
+          "./img/carousel/V7NF~GWA$M1VY05O[B$I5HN.jpg",
+        ],
+        cards: [
+          { id: 1, url: './img/cards/1.jpg' },
+          { id: 2, url: './img/cards/1.jpg' },
+          { id: 3, url: './img/cards/1.jpg' },
+          { id: 4, url: './img/cards/1.jpg' },
+          { id: 5, url: './img/cards/1.jpg' },
+          { id: 6, url: './img/cards/1.jpg' },
+          { id: 7, url: './img/cards/1.jpg' },
+          { id: 8, url: './img/cards/1.jpg' }
+        ],
+
+      },
+      methods: {},
+    });
+  </script>
+</body>
+
+</html>
