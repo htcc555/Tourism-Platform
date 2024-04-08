@@ -81,41 +81,38 @@
         width: auto;
         text-align: center;
         border-right: 1px solid #D6D6D6;
+
     }
 
     #sig {
+        margin: auto;
         margin-top: 20px;
         height: 15px;
         text-align: center;
         color: grey;
-        width: 240px;
-        
+        width: 220px;
+        position: relative;
     }
 
-    #sig::after {
-        right: 0;
-        bottom: 12px;
-        background-position: -26px -257px;
-        content: "";
-        display: block;
-        width: 8px;
-        height: 6px;
-        position: absolute;
-        background: url(/img/personal/ico_sprite_v8.png) no-repeat;
+    #sig:after {
+        content: "\"";
     }
 
-    #sig::before {
-        left: 0;
-    top: 5px;
-    background-position: -18px -257px;
-    content: "";
-    display: block;
-    width: 8px;
-    height: 6px;
-    position: absolute;
-    background: url(/img/personal/ico_sprite_v8.png) no-repeat;
+    #sig:before {
+        content: "\"";
 
     }
+
+    .follower {
+        height: 55px;
+        width: auto;
+        border-right: 2px solid #D6D6D6;
+        text-align: center;
+        line-height: 25px;
+    }
+
+    
+
 </style>
 
 <body>
@@ -180,9 +177,9 @@
                             <div style="width: auto;height: 58px;">
                                 <ul style="margin: 0;">
                                     <li class="head_li" style="width: 89px;">我的窝</li>
-                                    <li class="head_li">我的游记</li>
-                                    <li class="head_li">我的问答</li>
-                                    <li class="head_li">我的足迹</li>
+                                    <li class="head_li" @click="f1()">我的游记</li>
+                                    <li class="head_li"  @click="f2()">我的问答</li>
+                                    <li class="head_li"  @click="f3()">我的足迹</li>
                                     <li class="head_li">我的点评</li>
                                     <li class="head_li">我的结伴</li>
                                 </ul>
@@ -192,6 +189,7 @@
                 </div>
             </div>
             <el-container style="width: 980px;height: auto;margin: auto; background-color: #EFEFEF;overflow: visible; ">
+                <!-- 个人简介部分 -->
                 <el-aside width="266px"
                     style="height:500px;background-color: rgb(255, 255, 255);position: relative;overflow: visible; ">
                     <el-avatar :size="140" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -213,13 +211,80 @@
                             </el-col>
                         </el-row>
                     </div>
-                    <div style="width: 266px;height: 16px;position: relative;"><div id="sig">世界这么大我想去看看</div></div>
-                    
-                    <div style="width: auto;height: 60px;border-top: 1px solid #D6D6D6;
-                    border-bottom: 1px solid #D6D6D6;margin-top: 22px;"></div>
+                    <div style="width: 266px;height: 16px;position: relative;">
+                        <div id="sig">世界这么大我想去看看</div>
+                    </div>
+
+                    <!-- 关注 -->
+                    <div style="width: auto;height: 55px;border-top: 1px solid #D6D6D6;
+                    border-bottom: 1px solid #D6D6D6;margin-top: 22px;">
+                        <el-col :span="8">
+                            <div class="follower">
+                                <p>0</p><strong>关注</strong>
+                            </div>
+                        </el-col>
+                        <el-col :span="8">
+                            <div class="follower">
+                                <p>0</p><strong>粉丝</strong>
+                            </div>
+                        </el-col>
+                        <el-col :span="8">
+                            <div
+                                style="height: 55px;width: auto;text-align: center;text-align: center;line-height: 25px;">
+                                <p>0</p><strong>点赞</strong>
+                            </div>
+                        </el-col>
+                    </div>
+
+                    <!-- 留言板 -->
+                    <div
+                        style="height: 35px;width: auto;text-align: center;margin-top: 20px;line-height: 35px;color:grey;">
+                        留言版</div>
+                    <div style="width: 238px;height: 132px;margin: auto;"><el-input
+                        type="textarea"
+                        :rows="5"
+                        placeholder="说点什么..."
+                        v-model="textarea">
+                      </el-input>
+                    </div>  
                 </el-aside>
+                <!-- 内容部分 -->
                 <el-main>
-                    <div style="width: auto;height: 700px;background-color: cadetblue;"></div>
+                    <!-- 我的游记 -->
+                    <div v-show="ac1" id="travel_note" style="width: 674px;height:auto;margin-top: 20px;">
+                    <div style="width: 674px;height: 500px;background-color: #ffffff;position: relative;">
+                        <div style="width: 674px;height: 45px;"><h2 style="font-size: 20px;
+                            color: #444;
+                            font-weight: normal;
+                            position: absolute;
+                            left: 26px;">我的游记</h2></div>
+                        
+                    </div>
+                    </div>
+
+                    <!-- 我的问答 -->
+                    <div v-show="ac2" id="answer" style="width: 674px;height:auto;margin-top:20px;">
+                        <div style="width: 674px;height: 500px;background-color: #ffffff;position: relative;">
+                            <div style="width: 674px;height: 45px;"><h2 style="font-size: 20px;
+                                color: #444;
+                                font-weight: normal;
+                                position: absolute;
+                                left: 26px;">我的问答</h2></div>
+                            
+                        </div>
+                        </div>
+
+                    <!-- 我的足迹 -->
+                        <div v-show="ac3" id="footmark" style="width: 674px;height:auto;margin-top:20px;">
+                            <div style="width: 674px;height: 500px;background-color: #ffffff;position: relative;">
+                                <div style="width: 674px;height: 45px;"><h2 style="font-size: 20px;
+                                    color: #444;
+                                    font-weight: normal;
+                                    position: absolute;
+                                    left: 26px;">我的足迹</h2></div>
+                                
+                            </div>
+                            </div>
                 </el-main>
             </el-container>
             <!-- foot -->
@@ -245,11 +310,31 @@
         let v = new Vue({
             el: '#app',
             data: {
-
+                textarea:' ',
+                ac1:true,
+                ac2:true,
+                ac3:true,
             },
             methods: {
+                f1(){
+                    this.ac1=true
+                    this.ac2=false
+                    this.ac3=false
+                },
+                f2(){
+                    this.ac2=true
+                    this.ac1=false
+                    this.ac3=false
+                },
+                f3(){
+                    this.ac3=true
+                    this.ac2=false
+                    this.ac1=false
+                }
+            },
+            computed:{
 
-            }
+            },
         })
     </script>
 </body>

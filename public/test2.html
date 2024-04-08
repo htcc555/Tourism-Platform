@@ -9,29 +9,28 @@
     <script src="./js/eui.js"></script>
     <script src="./js/axios.min.js"></script>
 </head>
+<style>
+    
+  </style>
+
+
 <body>
     <div id="app">
-        <div style="height: 200px;width: 200px;background-color: rgb(124, 212, 121);"></div>
-        <div style="height: 200px;width: 200px;position: relative;">
-            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" alt="" style="position: absolute;top: -78px;">
-            
-        </div>
+        <div id="a1" style="width: 200px;height: 200px;background-color: aqua;"></div>
     </div>
 
     <script>
+        var a=document.getElementById('a1')
+        a.onclick=function(){
+            a.style.display='none'
+        }
         let v = new Vue({
             el:'#app',
             data:{
-                a:document.getElementById('ts').style.height,
-                c:615
+
             },
             methods:{
-                a_click(){
-                    this.c+=200
-                    console.log(this.c)
-                    console.log(this.a)
-                    document.getElementById('ts').style.height=this.c+'px'
-                }
+                
             }
         })
     </script>
