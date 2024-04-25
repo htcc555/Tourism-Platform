@@ -18,6 +18,13 @@
       font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     }
 
+    a {
+            text-decoration: none;
+            display: inline-block;
+            color: rgb(153, 153, 153);
+        }
+
+
     .el-row {
       height: 68px;
       border-bottom: 2px solid rgb(245, 246, 247);
@@ -31,6 +38,7 @@
     .head-li {
       display: inline;
       margin-left: 29px;
+      cursor: pointer;
     }
 
     .head-li:hover {
@@ -39,6 +47,8 @@
 
     .el1 {
       overflow-y: hidden;
+      width: 55px;
+      margin: auto;
     }
 
     .el2 {
@@ -152,14 +162,14 @@
         <el-header style="height: 60px;">
           <el-row style="height: 58px;">
             <el-col :span="4" style="height: 58px;">
-              <div class="el1"><img src="./img/logo.png" alt="" /></div>
+              <div class="el1" ><img src="./img/logo.png" alt="" width="55px" height="55px" /></div>
             </el-col>
             <el-col :span="16" style="height: 58px;">
               <div class="el2">
                 <ul class="head-ul">
-                  <li class="head-li" style="background-color:#f18541">首页</li>
+                  <li class="head-li">首页</li>
                   <li class="head-li">旅游攻略</li>
-                  <li class="head-li">景点详情</li>
+                  <li class="head-li">酒店民宿</li>
                   <li class="head-li">个人中心</li>
                   <li class="head-li">社区</li>
                   <li class="head-li">AI咨询</li>
@@ -248,9 +258,7 @@
           background-clip: initial;
           background-color: initial;"></div>
 
-    <div style="margin: auto; width: 1070px; height: 652px;
-          background-color: rgb(245,245,245);">
-          </div>
+    
     </el-main>
 
     <el-footer>

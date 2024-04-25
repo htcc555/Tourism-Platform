@@ -9,28 +9,39 @@
     <script src="./js/eui.js"></script>
     <script src="./js/axios.min.js"></script>
 </head>
-<style>
-    
-  </style>
-
-
 <body>
     <div id="app">
-        <div id="a1" style="width: 200px;height: 200px;background-color: aqua;"></div>
+        <el-rate
+        v-model="mark[3]"
+        disabled
+        show-score
+        text-color="#ff9900"
+        >
+      </el-rate>
+      <button @click="cl()">点击一下</button>
     </div>
 
     <script>
-        var a=document.getElementById('a1')
-        a.onclick=function(){
-            a.style.display='none'
-        }
         let v = new Vue({
             el:'#app',
             data:{
-
+                value:'3.9',
+                hotel_mg: [
+                    { img_url: './img/hotel_img/1.jpg', name: '北京饭店诺金', price: '878.24', mark:9.2 },
+                    { img_url: './img/hotel_img/2.jpg', name: '北京东方君悦大酒店', price: '896.15', mark:'9.0' },
+                    { img_url: './img/hotel_img/3.jpg', name: '北京王府半岛酒店', price: '2050.56', mark:9.4 },
+                    { img_url: './img/hotel_img/4.jpg', name: '北京日出东方凯宾斯基酒店', price: '2045.58', mark:9.2 },
+                    { img_url: './img/hotel_img/5.jpg', name: '北京榆社', price: '1999.23', mark:9.4 },
+                    { img_url: './img/hotel_img/6.jpg', name: '北京雁栖酒店', price: '1988.00', mark:9.4 },
+                    { img_url: './img/hotel_img/7.jpg', name: '北京长城脚下的公社', price: '1605.72', mark:8.6 },
+                    { img_url: './img/hotel_img/8.jpg', name: '北京千禧大酒店', price: '947.05', mark:8.8 }
+                ],
+                mark:[1,2,3,4,5,6,7,8,9]
             },
             methods:{
-                
+                cl(){
+                    console.log(typeof(this.value))
+                }
             }
         })
     </script>
