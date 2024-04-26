@@ -132,7 +132,7 @@
     .fh1 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -142,7 +142,7 @@
     .fh2 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -151,7 +151,7 @@
     .fh3 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -160,7 +160,7 @@
     .fh4 {
         width: 233px;
         height: 280px;
-        
+
         float: left;
         margin-bottom: 20px;
     }
@@ -168,7 +168,7 @@
     .fh5 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -178,7 +178,7 @@
     .fh6 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -187,7 +187,7 @@
     .fh7 {
         width: 233px;
         height: 280px;
-        
+
         margin-right: 12px;
         float: left;
         margin-bottom: 20px;
@@ -196,16 +196,56 @@
     .fh8 {
         width: 233px;
         height: 280px;
-        
+
         float: left;
         margin-bottom: 20px;
     }
-    .img_scale{
+
+    .img_scale {
         cursor: pointer;
     }
 
-    .img_scale:hover{
-        transform: scale(1.05,1.05);
+    .img_scale:hover {
+        transform: scale(1.05, 1.05);
+    }
+
+    #movie {
+        width: 970px;
+        height: 177px;
+        margin: auto;
+        border-left: 7px solid #A3E2F7;
+        border-top: 2px solid #A3E2F7;
+        border-right: 2px solid #A3E2F7;
+        border-bottom: 2px solid #A3E2F7;
+    }
+
+    .mv_p {
+        color: #F1F2F1;
+        margin: auto;
+    }
+
+    .mv {
+        width: 190px;
+        height: 300px;
+        float: left;
+        margin-left: 5px;
+        margin-top: 40px;
+        background: linear-gradient(to top, #000 15%, #312c2c 15%,);
+        background-size: contain;
+        
+    }
+    .flex{
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        margin-left: -40px;
+    }
+    .flex li{
+        line-height: 44px;
+    font-size: 14px;
+    width: 11.1%;
+    height: 44px;
+    overflow: hidden;
     }
 </style>
 
@@ -289,7 +329,7 @@
             </div>
         </div>
         <!-- 精选部分 -->
-        <div style="width: auto;height: 840px;">
+        <div style="width: auto;height: 740px;">
             <h3 style="margin-left: 15px;margin-top: 30px;">精选酒店</h3>
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1">北京</el-menu-item>
@@ -303,16 +343,130 @@
             <div v-for="(item,index) in hotel_mg" :key="index" :class="featured_hotel[index]">
                 <img class="img_scale" :src="item.img_url" alt="" width="232px" height="156px">
                 <span style="line-height: 40px;">{{item.name}}</span>
-                <el-rate
-                    v-model="item.mark"
-                    disabled
-                    show-score
-                    text-color="#ff9900"
-                    >
+                <el-rate v-model="item.mark" disabled show-score text-color="#ff9900">
                 </el-rate>
                 <p>{{item.price}} 元起</p>
             </div>
         </div>
+        <!-- 跟着电影去旅行 -->
+        <div style="width: 980px;height: 550px;">
+            <div id="movie">
+                <p style="font-size: 20px;
+                font-weight: 500;
+                line-height: 12px;margin-left: 50px;margin-top: 40px;">跟着电影去旅行</p>
+                <p style="font-size: 16px;
+                opacity: .6;
+                line-height: 31px;
+                margin-top: 25px;margin-left: 50px;margin-top: -2px;">
+                    电影镜头下的异国他乡，永远对旅人有着非凡的吸引力。多瑙河畔的忧郁星期天，罗马街头的阳光与微风，在午夜巴黎寻找黄金时代，到喧闹旺角体会平凡人的英雄梦想，或是干脆放空所有，迷失于东京的霓虹闪烁……</p>
+            </div>
+
+            <div v-for="(item,index) in movie_travle" :key="index" class="mv"
+                :style="{'background-image':'url('+item.img_url+')'}">
+
+                <div style="width: 150px;
+                height: 25px;margin-top: 230px;margin-left: 20px;">
+                    <p class="mv_p" style="font-size: 18px;
+                    line-height: 15px;
+                    font-weight: 500;">{{item.title}}</p>
+                </div>
+
+                <div style="width: 150px;
+                    height: 17px;margin-left: 20px;">
+                    <p class="mv_p" style="font-size: 12px;
+                    line-height: 10px;
+                    font-weight: 400;">{{item.name}}</p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div style="width: 980px;height: 180px;"> 
+            <div style="font-size: 18px;
+            line-height: 14px;
+            padding: 0;
+            font-weight: 400;
+            cursor: default;
+            color: #323232;
+            display: block;
+            margin-top: 50px;">国外酒店预订</div>
+            <el-divider></el-divider>
+            <ul class="flex"><li><a href="https://hotel.qyer.com/country_australia/">
+                澳大利亚</a></li><li><a href="https://hotel.qyer.com/country_austria/">
+                奥地利</a></li><li><a href="https://hotel.qyer.com/country_cambodia/">
+                柬埔寨</a></li><li><a href="https://hotel.qyer.com/country_vietnam/">
+                越南</a></li><li><a href="https://hotel.qyer.com/country_netherlands/">
+                荷兰</a></li><li><a href="https://hotel.qyer.com/country_indonesia/">
+                印度尼西亚</a></li><li><a href="https://hotel.qyer.com/country_vatican/">
+                梵蒂冈</a></li><li><a href="https://hotel.qyer.com/country_czech-republic/">
+                捷克</a></li><li><a href="https://hotel.qyer.com/country_russia/">
+                俄罗斯</a></li><li><a href="https://hotel.qyer.com/country_new-zealand/">
+                新西兰</a></li><li><a href="https://hotel.qyer.com/country_philippines/">
+                菲律宾</a></li><li><a href="https://hotel.qyer.com/country_belgium/">
+                比利时</a></li><li><a href="https://hotel.qyer.com/country_turkey/">
+                土耳其</a></li><li><a href="https://hotel.qyer.com/country_canada/">
+                加拿大</a></li><li><a href="https://hotel.qyer.com/country_greece/">
+                希腊</a></li><li><a href="https://hotel.qyer.com/country_united-arab-emirates/">
+                阿联酋</a></li><li><a href="https://hotel.qyer.com/country_hungary/">
+                匈牙利</a></li><li><a href="https://hotel.qyer.com/country_sweden/">
+                瑞典</a></li><li><a href="https://hotel.qyer.com/country_denmark/">
+                丹麦</a></li><li><a href="https://hotel.qyer.com/country_portugal/">
+                葡萄牙</a></li></ul>
+        </div>
+    
+        <div style="width: 980px;height: 230px;"> 
+            <div style="font-size: 18px;
+            line-height: 14px;
+            padding: 0;
+            font-weight: 400;
+            cursor: default;
+            color: #323232;
+            display: block;
+            margin-top: 50px;">国外酒店预订</div>
+            <el-divider></el-divider>
+            <ul class="flex"><li><a href="https://hotel.qyer.com/sanya/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                三亚</a></li><li><a href="https://hotel.qyer.com/london/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                伦敦</a></li><li><a href="https://hotel.qyer.com/suzhou/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                苏州</a></li><li><a href="https://hotel.qyer.com/zhuhai/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                珠海</a></li><li><a href="https://hotel.qyer.com/xian/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                西安</a></li><li><a href="https://hotel.qyer.com/munich/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                慕尼黑</a></li><li><a href="https://hotel.qyer.com/nara/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                奈良</a></li><li><a href="https://hotel.qyer.com/wuhan/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                武汉</a></li><li><a href="https://hotel.qyer.com/dalian/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                大连</a></li><li><a href="https://hotel.qyer.com/pattaya/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                芭提雅</a></li><li><a href="https://hotel.qyer.com/kenting/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                垦丁</a></li><li><a href="https://hotel.qyer.com/siem-reap/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                暹粒</a></li><li><a href="https://hotel.qyer.com/san-francisco/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                旧金山</a></li><li><a href="https://hotel.qyer.com/amsterdam/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                阿姆斯特丹</a></li><li><a href="https://hotel.qyer.com/tianjinshi/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                天津</a></li><li><a href="https://hotel.qyer.com/jinan/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                济南</a></li><li><a href="https://hotel.qyer.com/qingdao/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                青岛</a></li><li><a href="https://hotel.qyer.com/vatican/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                梵蒂冈</a></li><li><a href="https://hotel.qyer.com/prague/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                布拉格</a></li><li><a href="https://hotel.qyer.com/lijiang/" data-bn-ipg="Hotel-home-seo" target="_blank">
+                丽江</a></li></ul>
+        </div>
+        <!-- foot -->
+        <div style="width: 980px; background-color: #3f3f3f; height: 100px; margin: auto;">
+            <div style="
+                      float: left;
+                      font-size: 16px;
+                      color: white;
+                      margin-top: 20px;
+                      margin-left: 148px;
+                    ">
+                代码都对队有限公司所有
+                <br />
+                <p>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp制作人:一位不愿透露姓名的ikun
+                </p>
+            </div>
+        </div>
+
+
     </div>
 
     </div>
@@ -326,19 +480,23 @@
                 search_color2: '#A691FF',
                 color_change: true,
                 value1: '1',
-                
+
                 udline: '2px solid rgb(255, 255, 255)',
                 hotel_mg: [
-                    { img_url: './img/hotel_img/1.jpg', name: '北京饭店诺金', price: '878.24', mark:4.6},
-                    { img_url: './img/hotel_img/2.jpg', name: '北京东方君悦大酒店', price: '896.15', mark:4.5 },
-                    { img_url: './img/hotel_img/3.jpg', name: '北京王府半岛酒店', price: '2050.56', mark:4.7 },
-                    { img_url: './img/hotel_img/4.jpg', name: '北京日出东方凯宾斯基酒店', price: '2045.58', mark:4.6 },
-                    { img_url: './img/hotel_img/5.jpg', name: '北京榆社', price: '1999.23', mark:4.7 },
-                    { img_url: './img/hotel_img/6.jpg', name: '北京雁栖酒店', price: '1988.00', mark:4.7 },
-                    { img_url: './img/hotel_img/7.jpg', name: '北京长城脚下的公社', price: '1605.72', mark:4.3 },
-                    { img_url: './img/hotel_img/8.jpg', name: '北京千禧大酒店', price: '947.05', mark:4.4 }
+                    { img_url: './img/hotel_img/1.jpg', name: '北京饭店诺金', price: '878.24', mark: 4.6 },
+                    { img_url: './img/hotel_img/2.jpg', name: '北京东方君悦大酒店', price: '896.15', mark: 4.5 },
+                    { img_url: './img/hotel_img/3.jpg', name: '北京王府半岛酒店', price: '2050.56', mark: 4.7 },
+                    { img_url: './img/hotel_img/4.jpg', name: '北京日出东方凯宾斯基酒店', price: '2045.58', mark: 4.6 },
+                    { img_url: './img/hotel_img/5.jpg', name: '北京榆社', price: '1999.23', mark: 4.7 },
+                    { img_url: './img/hotel_img/6.jpg', name: '北京雁栖酒店', price: '1988.00', mark: 4.7 },
+                    { img_url: './img/hotel_img/7.jpg', name: '北京长城脚下的公社', price: '1605.72', mark: 4.3 },
+                    { img_url: './img/hotel_img/8.jpg', name: '北京千禧大酒店', price: '947.05', mark: 4.4 }
                 ],
-                
+                movie_travle: [{ title: '布达佩斯之恋', name: 'Budapest', img_url: './img/hotel_img/budapest.jpg' },
+                { title: '罗马假日', name: 'Roma', img_url: './img/hotel_img/roma.jpg' },
+                { title: '午夜巴黎', name: 'Paris', img_url: './img/hotel_img/paris.jpg' },
+                { title: '旺角卡门', name: 'Hong Kong', img_url: './img/hotel_img/hongkong.jpg' },
+                { title: '迷失东京', name: 'Tokyo', img_url: './img/hotel_img/tokyo.jpg' },],
                 featured_hotel: [
                     'fh1',
                     'fh2',
